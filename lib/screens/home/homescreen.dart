@@ -1,16 +1,19 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:imuslim/state/locationbloc/location_bloc.dart';
+import 'package:imuslim/state/praybloc/pray_bloc.dart';
 import 'package:imuslim/state/timesbloc/times_bloc.dart';
-import 'package:imuslim/util/icolors.dart';
+import 'package:imuslim/util/constants.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> locationDevice = Map<String, dynamic>();
     int _page = 0;
 
     return SafeArea(
@@ -21,7 +24,7 @@ class HomeScreen extends StatelessWidget {
               flex: 1,
               child: Container(
                 decoration: BoxDecoration(
-                  color: IColors.iwhite,
+                  color: Constants.iwhite,
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
@@ -40,6 +43,13 @@ class HomeScreen extends StatelessWidget {
                     BlocBuilder<LocationBloc, LocationState>(
                       builder: (context, state) {
                         if (state is SuccessGetLocation) {
+                          // kalau sukses dapat lokasi, jalanin ambil waktu shalat
+                          locationDevice = state.result;
+                          Position pos = locationDevice['position'];
+                          context.read<PrayBloc>().add(GetDefaultPrayTime(
+                              lat: pos.latitude, lon: pos.longitude));
+
+                          // end
                           return SizedBox(
                             width: 100,
                             child: Text(
@@ -73,7 +83,7 @@ class HomeScreen extends StatelessWidget {
                             ),
                           );
                         } else if (state is LoadingTimes) {
-                          return CircularProgressIndicator.adaptive();
+                          return const CircularProgressIndicator.adaptive();
                         } else if (state is FailureTimes) {
                           return Text(
                             state.error.toString(),
@@ -128,15 +138,37 @@ class HomeScreen extends StatelessWidget {
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30),
                   ),
-                  color: IColors.iwhite,
+                  color: Constants.iwhite,
                 ),
-                child: ListView.builder(
-                  itemCount: 7,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text('data'),
-                      trailing: Text('subdata'),
-                    );
+                child: BlocBuilder<PrayBloc, PrayState>(
+                  builder: (context, state) {
+                    if (state is LoadingDefaultPrayTime) {
+                      return const Center(
+                          child: CircularProgressIndicator.adaptive());
+                    } else if (state is FailureDefaultPrayTime) {
+                      return Container(
+                        child: Text('Error: ${state.info}'),
+                      );
+                    } else if (state is SuccessDefaultPrayTime) {
+                      var datas =
+                          (state.dataPrayTime.datetime[0].times).toJson();
+                      // var datas = data.toJson();
+                      print(datas.length);
+                      print('datas ====> $datas');
+                      return ListView.separated(
+                        separatorBuilder: (context, index) => const Divider(),
+                        itemCount: datas.length,
+                        itemBuilder: (context, index) {
+                          var items = datas.entries.toList();
+                          return ListTile(
+                            leading: Text(items[index].key),
+                            trailing: Text(items[index].value),
+                          );
+                        },
+                      );
+                    } else {
+                      return Container();
+                    }
                   },
                 ),
               ),
@@ -153,7 +185,7 @@ class HomeScreen extends StatelessWidget {
           ],
           animationCurve: Curves.ease,
           animationDuration: const Duration(milliseconds: 500),
-          buttonBackgroundColor: IColors.iblueLight,
+          buttonBackgroundColor: Constants.iblueLight,
           height: 60,
           onTap: (index) {
             print('tapped index- $index');
