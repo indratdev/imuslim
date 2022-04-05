@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:imuslim/screens/splash/splashscreen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:imuslim/state/timesbloc/times_bloc.dart';
+
 import 'package:imuslim/util/icolors.dart';
 import 'package:imuslim/util/routes.dart';
 
@@ -10,13 +12,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        scaffoldBackgroundColor: IColors.iblueLight,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => TimesBloc()..add(GetCurrentTime()),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          scaffoldBackgroundColor: IColors.iblueLight,
+        ),
+        initialRoute: '/splashscreen',
+        routes: Routes().getRoutes,
       ),
-      initialRoute: '/splashscreen',
-      routes: Routes().getRoutes,
     );
   }
 }

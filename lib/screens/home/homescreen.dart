@@ -1,6 +1,8 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:imuslim/state/timesbloc/times_bloc.dart';
 import 'package:imuslim/util/icolors.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -35,7 +37,25 @@ class HomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Text('Jakarta Timur'),
-                    Text('tanggal 2'),
+                    BlocBuilder<TimesBloc, TimesState>(
+                      builder: (context, state) {
+                        if (state is SuccessTimes) {
+                          return Text(
+                            '${state.value.toString()}',
+                            style: TextStyle(
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          );
+                        } else {
+                          return Text(
+                            "Loading...",
+                            style: TextStyle(
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          );
+                        }
+                      },
+                    ),
                   ],
                 ),
               ),
