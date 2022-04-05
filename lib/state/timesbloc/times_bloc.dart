@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:imuslim/data/times/times.dart';
+
+import '../../data/others/times.dart';
 
 part 'times_event.dart';
 part 'times_state.dart';

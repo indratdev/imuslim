@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:imuslim/state/locationbloc/location_bloc.dart';
 import 'package:imuslim/state/timesbloc/times_bloc.dart';
 
 import 'package:imuslim/util/icolors.dart';
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => TimesBloc()..add(GetCurrentTime()),
         ),
+        BlocProvider(
+          create: (context) => LocationBloc()..add(GetLocationEvent()),
+        )
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

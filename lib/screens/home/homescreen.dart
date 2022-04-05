@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:imuslim/state/locationbloc/location_bloc.dart';
 import 'package:imuslim/state/timesbloc/times_bloc.dart';
 import 'package:imuslim/util/icolors.dart';
 
@@ -31,28 +32,57 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                padding: EdgeInsets.all(10),
-                margin: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
+                margin: const EdgeInsets.all(10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text('Jakarta Timur'),
-                    BlocBuilder<TimesBloc, TimesState>(
+                    BlocBuilder<LocationBloc, LocationState>(
                       builder: (context, state) {
-                        if (state is SuccessTimes) {
+                        if (state is SuccessGetLocation) {
+                          return SizedBox(
+                            width: 100,
+                            child: Text(
+                              '${state.result['cityName']}',
+                              style: const TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          );
+                        } else if (state is LoadingGetLocation) {
+                          return const CircularProgressIndicator.adaptive();
+                        } else if (state is FailedGetLocation) {
                           return Text(
-                            '${state.value.toString()}',
-                            style: TextStyle(
+                            state.info.toString(),
+                            style: const TextStyle(
                               overflow: TextOverflow.ellipsis,
                             ),
                           );
                         } else {
+                          return const Text('Undefined');
+                        }
+                      },
+                    ),
+                    BlocBuilder<TimesBloc, TimesState>(
+                      builder: (context, state) {
+                        if (state is SuccessTimes) {
                           return Text(
-                            "Loading...",
-                            style: TextStyle(
+                            state.value.toString(),
+                            style: const TextStyle(
                               overflow: TextOverflow.ellipsis,
                             ),
                           );
+                        } else if (state is LoadingTimes) {
+                          return CircularProgressIndicator.adaptive();
+                        } else if (state is FailureTimes) {
+                          return Text(
+                            state.error.toString(),
+                            style: const TextStyle(
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          );
+                        } else {
+                          return const Text('Undefined');
                         }
                       },
                     ),
@@ -63,7 +93,7 @@ class HomeScreen extends StatelessWidget {
             Flexible(
               flex: 2,
               child: Container(
-                margin: EdgeInsets.only(top: 30, left: 10, right: 10),
+                margin: const EdgeInsets.only(top: 30, left: 10, right: 10),
                 child: Column(
                   children: <Widget>[
                     Text(
@@ -88,12 +118,12 @@ class HomeScreen extends StatelessWidget {
             Flexible(
               flex: 8,
               child: Container(
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   left: 10,
                   right: 10,
                   top: 10,
                 ),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30),
                     topRight: Radius.circular(30),
