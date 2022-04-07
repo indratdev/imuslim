@@ -7,4 +7,4 @@ abstract class TimesEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class GetCurrentTime extends TimesEvent {}
+class GetcurrentDateLocal extends TimesEvent {}

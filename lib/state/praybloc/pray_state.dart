@@ -22,9 +22,11 @@ class FailureDefaultPrayTime extends PrayState {
 
 class SuccessDefaultPrayTime extends PrayState {
   PrayTimes dataPrayTime;
+  Map<String, dynamic> nextTimePrayer;
 
-  SuccessDefaultPrayTime({required this.dataPrayTime});
+  SuccessDefaultPrayTime(
+      {required this.dataPrayTime, required this.nextTimePrayer});
 
   @override
-  List<Object> get props => [dataPrayTime];
+  List<Object> get props => [dataPrayTime, nextTimePrayer];
 }

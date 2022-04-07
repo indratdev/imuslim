@@ -9,10 +9,10 @@ part 'times_state.dart';
 class TimesBloc extends Bloc<TimesEvent, TimesState> {
   Times times = Times();
   TimesBloc() : super(TimesInitial()) {
-    on<GetCurrentTime>((event, emit) {
+    on<GetcurrentDateLocal>((event, emit) {
       try {
         emit(LoadingTimes());
-        final value = times.currentTime();
+        final value = times.currentDateLocal();
         emit(SuccessTimes(value: value));
       } catch (e) {
         emit(FailureTimes(error: e.toString()));

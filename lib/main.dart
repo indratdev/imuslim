@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => TimesBloc()..add(GetCurrentTime()),
+          create: (context) => TimesBloc()..add(GetcurrentDateLocal()),
         ),
         BlocProvider(
           create: (context) => LocationBloc()..add(GetLocationEvent()),

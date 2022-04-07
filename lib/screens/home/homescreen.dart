@@ -103,24 +103,42 @@ class HomeScreen extends StatelessWidget {
               flex: 2,
               child: Container(
                 margin: const EdgeInsets.only(top: 30, left: 10, right: 10),
-                child: Column(
-                  children: <Widget>[
-                    Text(
-                      'dhuhr 11: 57',
-                      style: GoogleFonts.lato(
-                        color: Colors.black,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      '30 menit lagi',
-                      style: GoogleFonts.lato(
-                        color: Colors.black,
-                        fontSize: 15,
-                      ),
-                    ),
-                  ],
+                child: BlocBuilder<PrayBloc, PrayState>(
+                  builder: (context, state) {
+                    if (state is LoadingDefaultPrayTime) {
+                      return Center(
+                        child: CircularProgressIndicator.adaptive(),
+                      );
+                    } else if (state is FailureDefaultPrayTime) {
+                      return Center(
+                        child: Text('Cannot Show The Time'),
+                      );
+                    } else if (state is SuccessDefaultPrayTime) {
+                      return Column(
+                        children: <Widget>[
+                          Text(
+                            // '${state.nextTimePrayer.keys.toString()} - ${state.nextTimePrayer.values.toString()}',
+                            '${state.nextTimePrayer.keys.elementAt(0).toString()} - ${state.nextTimePrayer.values.elementAt(0).toString()} ',
+                            // 'dhuhr 11: 57',
+                            style: GoogleFonts.lato(
+                              color: Colors.black,
+                              fontSize: 25,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            '30 menit lagi',
+                            style: GoogleFonts.lato(
+                              color: Colors.black,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ],
+                      );
+                    } else {
+                      return Container();
+                    }
+                  },
                 ),
               ),
             ),
