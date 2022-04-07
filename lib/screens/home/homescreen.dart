@@ -48,7 +48,6 @@ class HomeScreen extends StatelessWidget {
                           Position pos = locationDevice['position'];
                           context.read<PrayBloc>().add(GetDefaultPrayTime(
                               lat: pos.latitude, lon: pos.longitude));
-
                           // end
                           return SizedBox(
                             width: 100,
@@ -153,8 +152,7 @@ class HomeScreen extends StatelessWidget {
                       var datas =
                           (state.dataPrayTime.datetime[0].times).toJson();
                       // var datas = data.toJson();
-                      print(datas.length);
-                      print('datas ====> $datas');
+
                       return ListView.separated(
                         separatorBuilder: (context, index) => const Divider(),
                         itemCount: datas.length,

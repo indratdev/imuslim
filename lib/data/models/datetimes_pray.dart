@@ -32,18 +32,16 @@ class DateTimes {
 
 @JsonSerializable()
 class Times {
-  String Imsak, Sunrise, Fajr, Dhuhr, Asr, Sunset, Maghrib, Isha, Midnight;
+  // String Imsak, Sunrise, Fajr, Dhuhr, Asr, Sunset, Maghrib, Isha, Midnight;
+  String Imsak, Fajr, Dhuhr, Asr, Maghrib, Isha;
 
   Times({
     required this.Imsak,
-    required this.Sunrise,
-    required this.Sunset,
     required this.Asr,
     required this.Dhuhr,
     required this.Fajr,
     required this.Isha,
     required this.Maghrib,
-    required this.Midnight,
   });
 
   factory Times.fromJson(Map<String, dynamic> json) => _$TimesFromJson(json);

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:imuslim/data/others/times.dart';
 import 'package:imuslim/util/constants.dart';
 import 'package:intl/date_symbol_data_local.dart';
 

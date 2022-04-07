@@ -18,26 +18,20 @@ Map<String, dynamic> _$DateTimesToJson(DateTimes instance) => <String, dynamic>{
 
 Times _$TimesFromJson(Map<String, dynamic> json) => Times(
       Imsak: json['Imsak'] as String,
-      Sunrise: json['Sunrise'] as String,
-      Sunset: json['Sunset'] as String,
       Asr: json['Asr'] as String,
       Dhuhr: json['Dhuhr'] as String,
       Fajr: json['Fajr'] as String,
       Isha: json['Isha'] as String,
       Maghrib: json['Maghrib'] as String,
-      Midnight: json['Midnight'] as String,
     );
 
 Map<String, dynamic> _$TimesToJson(Times instance) => <String, dynamic>{
       'Imsak': instance.Imsak,
-      'Sunrise': instance.Sunrise,
       'Fajr': instance.Fajr,
       'Dhuhr': instance.Dhuhr,
       'Asr': instance.Asr,
-      'Sunset': instance.Sunset,
       'Maghrib': instance.Maghrib,
       'Isha': instance.Isha,
-      'Midnight': instance.Midnight,
     };
 
 Date _$DateFromJson(Map<String, dynamic> json) => Date(
