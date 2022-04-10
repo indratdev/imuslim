@@ -41,14 +41,29 @@ class Times {
 
     for (var item in listWaktu.entries) {
       var value = int.parse((item.value.toString()).replaceAll(':', ''));
-      print('now : $now, value : $value');
+      // print('now : $now, value : $value');
       if (now <= value) {
         result.addAll({item.key: item.value});
         break;
       } else {
-        result.addAll({'Imsak': 'Next Day'});
+        // result.addAll({'Imsak': 'Next Day'});
+        result.addAll({'': ''});
       }
     }
     return result.entries.last;
+  }
+
+  // cek selisih waktu
+  Future<String> checkSelisihWaktu(String waktuAkanDatang) async {
+    var format = DateFormat("HH:mm");
+    var time = format.parse(currentTime());
+    var next = format.parse(waktuAkanDatang.toString());
+    var hasil = next.difference(time);
+    var hasil2 = hasil.toString().replaceAll(':00.000000', '');
+    var jam = hasil2.substring(0, 1);
+    var menit = hasil2.substring(2, 4);
+    final result = '$jam jam, $menit menit lagi';
+
+    return result;
   }
 }

@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> locationDevice = Map<String, dynamic>();
+    Map<String, dynamic> locationDevice = <String, dynamic>{};
     int _page = 0;
 
     return SafeArea(
@@ -61,10 +61,12 @@ class HomeScreen extends StatelessWidget {
                         } else if (state is LoadingGetLocation) {
                           return const CircularProgressIndicator.adaptive();
                         } else if (state is FailedGetLocation) {
-                          return Text(
-                            state.info.toString(),
-                            style: const TextStyle(
-                              overflow: TextOverflow.ellipsis,
+                          return Expanded(
+                            child: Text(
+                              state.info.toString(),
+                              style: const TextStyle(
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
                           );
                         } else {
@@ -106,11 +108,11 @@ class HomeScreen extends StatelessWidget {
                 child: BlocBuilder<PrayBloc, PrayState>(
                   builder: (context, state) {
                     if (state is LoadingDefaultPrayTime) {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator.adaptive(),
                       );
                     } else if (state is FailureDefaultPrayTime) {
-                      return Center(
+                      return const Center(
                         child: Text('Cannot Show The Time'),
                       );
                     } else if (state is SuccessDefaultPrayTime) {
@@ -126,10 +128,10 @@ class HomeScreen extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            '30 menit lagi',
+                            state.diffTime.toString(),
                             style: GoogleFonts.lato(
                               color: Colors.black,
-                              fontSize: 15,
+                              fontSize: 12,
                             ),
                           ),
                         ],
