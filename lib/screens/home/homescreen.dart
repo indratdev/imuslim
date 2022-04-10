@@ -118,8 +118,7 @@ class HomeScreen extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             // '${state.nextTimePrayer.keys.toString()} - ${state.nextTimePrayer.values.toString()}',
-                            '${state.nextTimePrayer.keys.elementAt(0).toString()} - ${state.nextTimePrayer.values.elementAt(0).toString()} ',
-                            // 'dhuhr 11: 57',
+                            '${state.nextTimePrayer.key} - ${state.nextTimePrayer.value}',
                             style: GoogleFonts.lato(
                               color: Colors.black,
                               fontSize: 25,

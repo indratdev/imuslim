@@ -22,7 +22,7 @@ class FailureDefaultPrayTime extends PrayState {
 
 class SuccessDefaultPrayTime extends PrayState {
   PrayTimes dataPrayTime;
-  Map<String, dynamic> nextTimePrayer;
+  MapEntry<String, dynamic> nextTimePrayer;
 
   SuccessDefaultPrayTime(
       {required this.dataPrayTime, required this.nextTimePrayer});

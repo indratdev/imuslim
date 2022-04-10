@@ -23,31 +23,32 @@ class Times {
 
   String currentTime() {
     var current = DateFormat('HH:mm').format(DateTime.now());
-    // print('current : $current');
-
+    // print('current time : $current');
     return current;
   }
 
-  Map<String, dynamic> nextTimeShalat(Map<String, dynamic> times) {
+  MapEntry<String, dynamic> nextTimeShalat(Map<String, dynamic> times) {
     var now = currentTime();
     return checkTimeFirst(times, now);
   }
 
-  Map<String, dynamic> checkTimeFirst(
+  MapEntry<String, dynamic> checkTimeFirst(
       Map<String, dynamic> listWaktu, String waktuSekarang) {
     Map<String, dynamic> result = {};
 
     int now = int.parse(waktuSekarang.replaceAll(':', ''));
+    // int now = 2100;
 
     for (var item in listWaktu.entries) {
       var value = int.parse((item.value.toString()).replaceAll(':', ''));
-      if (now < value) {
+      print('now : $now, value : $value');
+      if (now <= value) {
         result.addAll({item.key: item.value});
         break;
       } else {
         result.addAll({'Imsak': 'Next Day'});
       }
     }
-    return result;
+    return result.entries.last;
   }
 }
