@@ -53,7 +53,8 @@ class LocationDevice {
     final cityName = await getCityName(position);
     result['position'] = position;
     result['cityName'] = cityName;
-
+    // print('city name : $cityName ');
+    // print('posisi name : $position ');
     return result;
   }
 

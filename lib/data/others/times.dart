@@ -55,6 +55,7 @@ class Times {
 
   // cek selisih waktu
   Future<String> checkSelisihWaktu(String waktuAkanDatang) async {
+    late String result;
     var format = DateFormat("HH:mm");
     var time = format.parse(currentTime());
     var next = format.parse(waktuAkanDatang.toString());
@@ -62,7 +63,10 @@ class Times {
     var hasil2 = hasil.toString().replaceAll(':00.000000', '');
     var jam = hasil2.substring(0, 1);
     var menit = hasil2.substring(2, 4);
-    final result = '$jam jam, $menit menit lagi';
+
+    (jam == '0')
+        ? result = '$menit menit lagi'
+        : result = '$jam jam, $menit menit lagi';
 
     return result;
   }
