@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> locationDevice = <String, dynamic>{};
-    int _page = 0;
+    // int _page = 0;
 
     return SafeArea(
       child: Scaffold(
@@ -193,21 +193,21 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
         //bottom navigation
-        bottomNavigationBar: CurvedNavigationBar(
-          index: _page,
-          items: const <Widget>[
-            Icon(Icons.access_time, size: 30, semanticLabel: 'Waktu Shalat'),
-            Icon(Icons.mosque, size: 30, semanticLabel: 'Surat'),
-            Icon(Icons.menu, size: 30, semanticLabel: 'Menu'),
-          ],
-          animationCurve: Curves.ease,
-          animationDuration: const Duration(milliseconds: 500),
-          buttonBackgroundColor: Constants.iblueLight,
-          height: 60,
-          onTap: (index) {
-            print('tapped index- $index');
-          },
-        ),
+        // bottomNavigationBar: CurvedNavigationBar(
+        //   index: _page,
+        //   items: const <Widget>[
+        //     Icon(Icons.access_time, size: 30, semanticLabel: 'Waktu Shalat'),
+        //     Icon(Icons.mosque, size: 30, semanticLabel: 'Surat'),
+        //     Icon(Icons.menu, size: 30, semanticLabel: 'Menu'),
+        //   ],
+        //   animationCurve: Curves.ease,
+        //   animationDuration: const Duration(milliseconds: 500),
+        //   buttonBackgroundColor: Constants.iblueLight,
+        //   height: 60,
+        //   onTap: (index) {
+        //     print('tapped index- $index');
+        //   },
+        // ),
       ),
     );
   }

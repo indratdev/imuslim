@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:imuslim/data/others/times.dart';
+import 'package:imuslim/screens/imuslimapp.dart';
 import 'package:imuslim/util/constants.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
@@ -20,7 +21,12 @@ class _SplashScreenState extends State<SplashScreen> {
     Times().currentTime();
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
-        Navigator.pushReplacementNamed(context, '/');
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => IMuslimApp(),
+            ),
+            (route) => false);
       });
     });
   }
@@ -34,7 +40,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'iMuslim',
+              Constants.appName,
               style: GoogleFonts.lato(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,

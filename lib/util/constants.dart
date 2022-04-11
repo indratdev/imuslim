@@ -6,4 +6,7 @@ class Constants {
   static const color3 = Color(0xFFDFB59C);
   static const iblueLight = Color(0xFFDDE6FF);
   static const iwhite = Color(0xFFFEFEFE);
+  static const appName = 'iMuslim';
+
+  static const sizeBottomNav = 30.0;
 }
