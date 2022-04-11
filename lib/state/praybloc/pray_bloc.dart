@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:imuslim/data/others/times.dart';
-import 'package:imuslim/data/providers/api_connection.dart';
+import 'package:imuslim/data/providers/repository.dart';
 
 import '../../data/models/pray_times.dart';
 
@@ -11,18 +10,16 @@ part 'pray_event.dart';
 part 'pray_state.dart';
 
 class PrayBloc extends Bloc<PrayEvent, PrayState> {
-  ApiConnection api = ApiConnection();
-  Times time = Times();
+  final repo = Repository();
 
   PrayBloc() : super(PrayInitial()) {
     on<GetDefaultPrayTime>((event, emit) async {
       try {
         emit(LoadingDefaultPrayTime());
-        final result = await api.getDailyTimesPray(event.lat, event.lon);
+        final result = await repo.getDailyTimesPray(event.lat, event.lon);
         final nextTimePrayer =
-            time.nextTimeShalat(result.datetime[0].times.toJson());
-
-        final diffTime = await time.checkSelisihWaktu(nextTimePrayer.value);
+            repo.nextTimeShalat(result.datetime[0].times.toJson());
+        final diffTime = await repo.checkSelisihWaktu(nextTimePrayer.value);
 
         emit(SuccessDefaultPrayTime(
           dataPrayTime: result,
