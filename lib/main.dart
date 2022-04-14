@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           create: (context) => LocationBloc()..add(GetLocationEvent()),
         ),
         BlocProvider(
-          create: (context) => PrayBloc()..add(GetAllSurah()),
+          create: (context) => PrayBloc(),
         ),
         BlocProvider(
           create: (context) => BottomnavBloc(),

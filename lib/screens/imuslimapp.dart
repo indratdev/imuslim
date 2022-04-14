@@ -47,7 +47,7 @@ class IMuslimApp extends StatelessWidget {
             animationCurve: Curves.ease,
             animationDuration: const Duration(milliseconds: 500),
             buttonBackgroundColor: Constants.iwhite,
-            height: 75,
+            height: 60,
             onTap: (index) {
               print('tapped index- $index');
               BlocProvider.of<BottomnavBloc>(context)
