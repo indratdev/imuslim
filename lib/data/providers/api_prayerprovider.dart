@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:imuslim/data/models/pray_times.dart';
+import 'package:imuslim/data/models/spesifik_surah_model.dart';
 import 'package:imuslim/data/models/surah_model.dart';
 import 'package:imuslim/data/others/times.dart';
 
@@ -28,10 +29,23 @@ class ApiPrayerProvider {
     var result = jsonDecode(response.body);
     // print('data ===> ${result}');
 
-    if (result['code'] == 200 && result['status'] == 'OK.') {
+    if (result['code'] == 200 || result['status'] == 'OK.') {
       return SurahModel.fromJson(result);
     } else {
       throw Exception('Failed Get Surah');
+    }
+  }
+
+  Future<SpesifikSurahModel> getDetailSurah(int number) async {
+    Uri url = Uri.parse('https://api.quran.sutanlab.id/surah/$number');
+    var response = await http.get(url);
+    var result = jsonDecode(response.body);
+
+    if (result['code'] == 200 || result['code'] == 'OK.') {
+      // var data = result['data'];
+      return SpesifikSurahModel.fromJson(result);
+    } else {
+      throw Exception('Failed Get Detail Surah');
     }
   }
 }

@@ -26,7 +26,6 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
       name: Name.fromJson(json['name'] as Map<String, dynamic>),
       number: json['number'] as int? ?? 0,
       numberOfVerses: json['numberOfVerses'] as int? ?? 0,
-      preBismillah: json['preBismillah'] as String? ?? '',
       revelation:
           Revelation.fromJson(json['revelation'] as Map<String, dynamic>),
       sequence: json['sequence'] as int? ?? 0,
@@ -43,7 +42,6 @@ Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
       'name': instance.name,
       'revelation': instance.revelation,
       'tafsir': instance.tafsir,
-      'preBismillah': instance.preBismillah,
       'verses': instance.verses,
     };
 
@@ -100,11 +98,12 @@ Map<String, dynamic> _$RevelationToJson(Revelation instance) =>
     };
 
 Tafsir _$TafsirFromJson(Map<String, dynamic> json) => Tafsir(
-      id: json['id'] as String? ?? '',
-    );
+      id: json['id'] as String?,
+    )..en = json['en'] as String?;
 
 Map<String, dynamic> _$TafsirToJson(Tafsir instance) => <String, dynamic>{
       'id': instance.id,
+      'en': instance.en,
     };
 
 Verses _$VersesFromJson(Map<String, dynamic> json) => Verses(
@@ -114,7 +113,7 @@ Verses _$VersesFromJson(Map<String, dynamic> json) => Verses(
       translation:
           Translation.fromJson(json['translation'] as Map<String, dynamic>),
       audio: Audio.fromJson(json['audio'] as Map<String, dynamic>),
-      tafsir: Tafsir.fromJson(json['tafsir'] as Map<String, dynamic>),
+      tafsir: TafsirB.fromJson(json['tafsir'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$VersesToJson(Verses instance) => <String, dynamic>{
@@ -155,8 +154,8 @@ Map<String, dynamic> _$MetaToJson(Meta instance) => <String, dynamic>{
     };
 
 Sajda _$SajdaFromJson(Map<String, dynamic> json) => Sajda(
-      obligatory: json['obligatory'] as String? ?? '',
-      recommended: json['recommended'] as String? ?? '',
+      obligatory: json['obligatory'] as bool? ?? false,
+      recommended: json['recommended'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$SajdaToJson(Sajda instance) => <String, dynamic>{
@@ -181,4 +180,12 @@ Audio _$AudioFromJson(Map<String, dynamic> json) => Audio(
 
 Map<String, dynamic> _$AudioToJson(Audio instance) => <String, dynamic>{
       'primary': instance.primary,
+    };
+
+TafsirB _$TafsirBFromJson(Map<String, dynamic> json) => TafsirB(
+      id: json['id'] as Map<String, dynamic>,
+    );
+
+Map<String, dynamic> _$TafsirBToJson(TafsirB instance) => <String, dynamic>{
+      'id': instance.id,
     };

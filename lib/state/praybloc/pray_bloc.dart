@@ -36,9 +36,6 @@ class PrayBloc extends Bloc<PrayEvent, PrayState> {
       try {
         emit(LoadingSurah());
         final result = await repo.getSurah();
-        print('================>>>>>> ${result}');
-        print(result.data[0].name.long.toString());
-
         emit(SuccessGetSurah(surah: result));
       } catch (e) {
         emit(FailureSurah(info: e.toString()));

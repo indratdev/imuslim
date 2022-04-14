@@ -28,14 +28,14 @@ class Data {
   Name name;
   Revelation revelation;
   Tafsir tafsir;
-  String preBismillah;
+  // String preBismillah;
   List<Verses> verses;
 
   Data({
     required this.name,
     this.number = 0,
     this.numberOfVerses = 0,
-    this.preBismillah = '',
+    // this.preBismillah = '',
     required this.revelation,
     this.sequence = 0,
     required this.tafsir,
@@ -113,10 +113,10 @@ class Revelation {
 
 @JsonSerializable()
 class Tafsir {
-  String id;
+  String? id, en;
 
   Tafsir({
-    this.id = '',
+    this.id,
   });
 
   factory Tafsir.fromJson(Map<String, dynamic> json) => _$TafsirFromJson(json);
@@ -131,7 +131,7 @@ class Verses {
   Text text;
   Translation translation;
   Audio audio;
-  Tafsir tafsir;
+  TafsirB tafsir;
 
   Verses({
     required this.number,
@@ -182,11 +182,11 @@ class Meta {
 
 @JsonSerializable()
 class Sajda {
-  String recommended, obligatory;
+  bool recommended, obligatory;
 
   Sajda({
-    this.obligatory = '',
-    this.recommended = '',
+    this.obligatory = false,
+    this.recommended = false,
   });
 
   factory Sajda.fromJson(Map<String, dynamic> json) => _$SajdaFromJson(json);
@@ -222,4 +222,18 @@ class Audio {
   factory Audio.fromJson(Map<String, dynamic> json) => _$AudioFromJson(json);
 
   Map<String, dynamic> toJson() => _$AudioToJson(this);
+}
+
+@JsonSerializable()
+class TafsirB {
+  Map<String, dynamic> id;
+
+  TafsirB({
+    required this.id,
+  });
+
+  factory TafsirB.fromJson(Map<String, dynamic> json) =>
+      _$TafsirBFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TafsirBToJson(this);
 }

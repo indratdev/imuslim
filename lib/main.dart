@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:imuslim/state/bottomnavbloc/bottomnav_bloc.dart';
 import 'package:imuslim/state/locationbloc/location_bloc.dart';
 import 'package:imuslim/state/praybloc/pray_bloc.dart';
+import 'package:imuslim/state/surahbloc/surah_bloc.dart';
 import 'package:imuslim/state/timesbloc/times_bloc.dart';
 import 'package:imuslim/util/constants.dart';
 import 'package:imuslim/util/routes.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => BottomnavBloc(),
+        ),
+        BlocProvider(
+          create: (context) => SurahBloc()..add(ViewDetailSurah(number: 1)),
         ),
       ],
       child: MaterialApp(
