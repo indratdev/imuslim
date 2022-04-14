@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:imuslim/data/models/surah_model.dart';
 import 'package:imuslim/data/providers/repository.dart';
 
 import '../../data/models/pray_times.dart';
@@ -30,5 +31,18 @@ class PrayBloc extends Bloc<PrayEvent, PrayState> {
         emit(FailureDefaultPrayTime(info: e.toString()));
       }
     });
-  }
+
+    on<GetAllSurah>((event, emit) async {
+      try {
+        emit(LoadingSurah());
+        final result = await repo.getSurah();
+        print('================>>>>>> ${result}');
+        print(result.data[0].name);
+
+        emit(SuccessGetSurah(surah: result));
+      } catch (e) {
+        emit(FailureSurah(info: e.toString()));
+      }
+    });
+  } // end bloc
 }

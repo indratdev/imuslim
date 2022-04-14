@@ -15,3 +15,5 @@ class GetDefaultPrayTime extends PrayEvent {
   @override
   List<Object> get props => [lat, lon];
 }
+
+class GetAllSurah extends PrayEvent {}

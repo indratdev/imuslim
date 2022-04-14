@@ -34,3 +34,20 @@ class SuccessDefaultPrayTime extends PrayState {
   @override
   List<Object> get props => [dataPrayTime, nextTimePrayer, diffTime];
 }
+
+class LoadingSurah extends PrayState {}
+
+class FailureSurah extends FailureDefaultPrayTime {
+  FailureSurah({required String info}) : super(info: info);
+}
+
+class SuccessGetSurah extends PrayState {
+  SurahModel surah;
+
+  SuccessGetSurah({
+    required this.surah,
+  });
+
+  @override
+  List<Object> get props => [surah];
+}

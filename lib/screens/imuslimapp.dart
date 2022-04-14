@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:imuslim/screens/home/homescreen.dart';
 import 'package:imuslim/screens/surah/surah_screen.dart';
 import 'package:imuslim/state/bottomnavbloc/bottomnav_bloc.dart';
+import 'package:imuslim/state/praybloc/pray_bloc.dart';
 import 'package:imuslim/util/constants.dart';
 
 class IMuslimApp extends StatelessWidget {
@@ -22,6 +23,10 @@ class IMuslimApp extends StatelessWidget {
       builder: (context, state) {
         if (state is SuccessChangePage) {
           _currentIndex = state.page;
+
+          if (state.page == 1) {
+            BlocProvider.of<PrayBloc>(context).add(GetAllSurah());
+          }
         }
 
         return Scaffold(

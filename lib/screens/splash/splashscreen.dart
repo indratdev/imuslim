@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:imuslim/data/others/times.dart';
+import 'package:imuslim/data/providers/api_prayerprovider.dart';
 import 'package:imuslim/screens/imuslimapp.dart';
 import 'package:imuslim/util/constants.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -21,6 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Times().currentTime();
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
+        ApiPrayerProvider().getSurah();
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
