@@ -1,4 +1,6 @@
 import 'package:imuslim/data/models/pray_times.dart';
+import 'package:imuslim/data/models/spesifik_surah_model.dart';
+import 'package:imuslim/data/models/surah_model.dart';
 import 'package:imuslim/data/others/location_device.dart';
 import 'package:imuslim/data/others/times.dart';
 import 'package:imuslim/data/providers/api_prayerprovider.dart';
@@ -35,4 +37,14 @@ class Repository {
     return locationDevice.determinePosition();
   }
   // =========== end repo location ===========
+
+  // =========== repo surah =============================
+  Future<SurahModel> getSurah() {
+    return prayerApiProvider.getSurah();
+  }
+
+  Future<SpesifikSurahModel> getDetailSurah(int number) {
+    return prayerApiProvider.getDetailSurah(number);
+  }
+  // =========== end repo surah =========================
 }
