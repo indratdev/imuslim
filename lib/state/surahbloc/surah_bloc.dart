@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:imuslim/data/models/spesifik_surah_model.dart';
 import 'package:imuslim/data/providers/repository.dart';
 import 'package:meta/meta.dart';
@@ -14,6 +15,7 @@ class SurahBloc extends Bloc<SurahEvent, SurahState> {
       try {
         emit(LoadingSurahDetail());
         var result = await repo.getDetailSurah(event.number);
+        print(result);
 
         emit(SuccessGetSurahDetail(data: result));
       } catch (e) {

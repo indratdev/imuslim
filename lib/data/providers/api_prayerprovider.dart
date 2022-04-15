@@ -40,6 +40,7 @@ class ApiPrayerProvider {
     Uri url = Uri.parse('https://api.quran.sutanlab.id/surah/$number');
     var response = await http.get(url);
     var result = jsonDecode(response.body);
+    print('hasil apiprovider : $result');
 
     if (result['code'] == 200 || result['code'] == 'OK.') {
       // var data = result['data'];

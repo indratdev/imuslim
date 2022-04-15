@@ -20,9 +20,13 @@ class FailureSurahDetail extends SurahState {
 
 class SuccessGetSurahDetail extends SurahState {
   SpesifikSurahModel data;
+  // BuildContext context;
+  // Route routeName;
 
   SuccessGetSurahDetail({
     required this.data,
+    // required this.context,
+    // required this.routeName,
   });
 
   @override

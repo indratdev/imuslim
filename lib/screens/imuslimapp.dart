@@ -13,6 +13,7 @@ class IMuslimApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int _currentIndex = 0;
+    String _appName = Constants.appName;
 
     List<Widget> _widgetOption = <Widget>[
       HomeScreen(),
@@ -24,15 +25,18 @@ class IMuslimApp extends StatelessWidget {
         if (state is SuccessChangePage) {
           _currentIndex = state.page;
 
-          if (state.page == 1) {
+          if (state.page == 0) {
+            _appName = Constants.appName;
+          } else if (state.page == 1) {
             BlocProvider.of<PrayBloc>(context).add(GetAllSurah());
+            _appName = Constants.textQuran;
           }
         }
 
         return Scaffold(
           appBar: AppBar(
-            title: const Text(
-              Constants.appName,
+            title: Text(
+              _appName,
             ),
           ),
           body: _widgetOption.elementAt(_currentIndex),
