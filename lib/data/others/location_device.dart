@@ -62,11 +62,11 @@ class LocationDevice {
     try {
       List<Placemark> placemark =
           await placemarkFromCoordinates(position.latitude, position.longitude);
-      return placemark[0].name ?? 'Lokasi Tidak Diketahui';
-      // return city;
+      // print(placemark);
+      return placemark[0].subAdministrativeArea ?? 'Lokasi Tidak Diketahui';
     } catch (e) {
       print(e.toString());
+      throw Exception();
     }
-    return null;
   }
 }

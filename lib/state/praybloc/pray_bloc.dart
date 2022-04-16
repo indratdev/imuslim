@@ -18,9 +18,12 @@ class PrayBloc extends Bloc<PrayEvent, PrayState> {
       try {
         emit(LoadingDefaultPrayTime());
         final result = await repo.getDailyTimesPray(event.lat, event.lon);
+
         final nextTimePrayer =
             repo.nextTimeShalat(result.datetime[0].times.toJson());
+
         final diffTime = await repo.checkSelisihWaktu(nextTimePrayer.value);
+        print('diffTime : $diffTime');
 
         emit(SuccessDefaultPrayTime(
           dataPrayTime: result,

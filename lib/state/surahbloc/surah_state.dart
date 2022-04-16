@@ -32,3 +32,21 @@ class SuccessGetSurahDetail extends SurahState {
   @override
   List<Object> get props => [data];
 }
+
+class LoadingMarkLastAyatSurah extends SurahState {}
+
+class FailureMarkLastAyatSurah extends SurahState
+    implements FailureSurahDetail {
+  @override
+  String info;
+
+  FailureMarkLastAyatSurah({
+    required this.info,
+  });
+
+  @override
+  // TODO: implement props
+  List<Object> get props => [info];
+}
+
+class SuccessMarkLastAyatSurah extends SurahState {}

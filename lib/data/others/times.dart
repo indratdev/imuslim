@@ -23,12 +23,13 @@ class Times {
 
   String currentTime() {
     var current = DateFormat('HH:mm').format(DateTime.now());
-    // print('current time : $current');
+    print('current time : $current');
     return current;
   }
 
   MapEntry<String, dynamic> nextTimeShalat(Map<String, dynamic> times) {
     var now = currentTime();
+
     return checkTimeFirst(times, now);
   }
 
@@ -37,7 +38,7 @@ class Times {
     Map<String, dynamic> result = {};
 
     int now = int.parse(waktuSekarang.replaceAll(':', ''));
-    // int now = 2100;
+    // int now = 1800;
 
     for (var item in listWaktu.entries) {
       var value = int.parse((item.value.toString()).replaceAll(':', ''));
@@ -47,7 +48,7 @@ class Times {
         break;
       } else {
         // result.addAll({'Imsak': 'Next Day'});
-        result.addAll({'': ''});
+        result.addAll({item.key: item.value});
       }
     }
     return result.entries.last;
@@ -58,16 +59,21 @@ class Times {
     late String result;
     var format = DateFormat("HH:mm");
     var time = format.parse(currentTime());
+
     var next = format.parse(waktuAkanDatang.toString());
     var hasil = next.difference(time);
-    var hasil2 = hasil.toString().replaceAll(':00.000000', '');
-    var jam = hasil2.substring(0, 1);
-    var menit = hasil2.substring(2, 4);
 
-    (jam == '0')
-        ? result = '$menit menit lagi'
-        : result = '$jam jam, $menit menit lagi';
+    if (hasil.isNegative) {
+      result = '-';
+    } else {
+      var hasil2 = hasil.toString().replaceAll(':00.000000', '');
+      var jam = hasil2.substring(0, 1);
+      var menit = hasil2.substring(2, 4);
 
+      (jam == '0')
+          ? result = '$menit menit lagi'
+          : result = '$jam jam, $menit menit lagi';
+    }
     return result;
   }
 }

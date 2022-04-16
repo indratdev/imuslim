@@ -14,3 +14,12 @@ class ViewDetailSurah extends SurahEvent {
     // required this.routeName,
   });
 }
+
+class MarkLastAyatSurah extends SurahEvent {
+  String surah, ayat;
+
+  MarkLastAyatSurah({
+    required this.surah,
+    required this.ayat,
+  });
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imuslim/screens/imuslimapp.dart';
 import 'package:imuslim/screens/splash/splashscreen.dart';
+import 'package:imuslim/screens/surah/surah_screen.dart';
 import 'package:imuslim/screens/surah/surahdetail_screen.dart';
 
 import '../screens/home/homescreen.dart';
@@ -10,6 +11,7 @@ class Routes {
     '/': (_) => IMuslimApp(),
     '/homescreen': (_) => HomeScreen(),
     '/splashscreen': (_) => SplashScreen(),
+    '/surah': (_) => SurahScreen(),
     '/surahdetail': (_) => SurahDetailScreen(),
   };
 }
