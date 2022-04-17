@@ -50,3 +50,15 @@ class FailureMarkLastAyatSurah extends SurahState
 }
 
 class SuccessMarkLastAyatSurah extends SurahState {}
+
+class SuccessGetLastAyatSurah extends SurahState {
+  String ayat;
+
+  SuccessGetLastAyatSurah({
+    required this.ayat,
+  });
+}
+
+class FailureGetLastAyatSurah extends FailureSurahDetail {
+  FailureGetLastAyatSurah({required String info}) : super(info: info);
+}

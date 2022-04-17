@@ -37,6 +37,10 @@ class SurahScreen extends StatelessWidget {
                           context
                               .read<SurahBloc>()
                               .add(ViewDetailSurah(number: data[index].number));
+                          // check have you ever read
+                          context.read<SurahBloc>().add(GetLastAyatSurah(
+                              surah: data[index].name.transliteration.id));
+
                           Navigator.pushNamed(context, '/surahdetail');
                         },
                         child: ListTile(

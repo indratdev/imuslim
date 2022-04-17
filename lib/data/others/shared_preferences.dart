@@ -8,10 +8,11 @@ class MySharedPref {
     pref.setString(surah, ayat);
   }
 
-  getMarkLastSurah(String surah) async {
+  Future<String> getMarkLastSurah(String surah) async {
     pref = await SharedPreferences.getInstance();
 
-    String? stringValue = pref.getString(surah);
-    print(stringValue);
+    String stringValue = pref.getString(surah) ?? "0";
+    print('shared pref value : $stringValue');
+    return stringValue;
   }
 }

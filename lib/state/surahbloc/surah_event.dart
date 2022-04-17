@@ -23,3 +23,11 @@ class MarkLastAyatSurah extends SurahEvent {
     required this.ayat,
   });
 }
+
+class GetLastAyatSurah extends SurahEvent {
+  String surah;
+
+  GetLastAyatSurah({
+    required this.surah,
+  });
+}

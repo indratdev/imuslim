@@ -1,13 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:imuslim/data/others/shared_preferences.dart';
 import 'package:imuslim/state/surahbloc/surah_bloc.dart';
 import 'package:imuslim/util/constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class SurahDetailScreen extends StatelessWidget {
-  const SurahDetailScreen({Key? key}) : super(key: key);
+  final ItemScrollController _itemScrollController = ItemScrollController();
+  String indexAyat = "0";
+
+  // scroll to index
+  scrollToIndex(int index) {
+    _itemScrollController.scrollTo(
+        index: index,
+        duration: const Duration(seconds: 3),
+        curve: Curves.easeInOutCubic);
+  }
+
+  SurahDetailScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +25,41 @@ class SurahDetailScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Surah'),
-          actions: const <Widget>[
-            Padding(
-              padding: EdgeInsets.all(5.0),
-              child: Icon(
-                Icons.settings,
-              ),
-            )
+          actions: <Widget>[
+            PopupMenuButton(
+              elevation: 20,
+              icon: const Icon(Icons.more_horiz),
+              color: Constants.iblueLight,
+              shape: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black, width: 1)),
+              onSelected: (value) {
+                switch (value) {
+                  case 0:
+                    (indexAyat == "0")
+                        ? scrollToIndex(0)
+                        : scrollToIndex(int.parse(indexAyat) - 1);
+                    break;
+
+                  default:
+                    (indexAyat == "0")
+                        ? scrollToIndex(0)
+                        : scrollToIndex(int.parse(indexAyat) - 1);
+                    break;
+                }
+              },
+              itemBuilder: (context) => [
+                PopupMenuItem<int>(
+                  value: 0,
+                  child: Text(
+                    'Ke Terakhir dibaca',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ],
+              // onSelected: (item) => {print(item)},
+            ),
           ],
         ),
         body: BlocConsumer<SurahBloc, SurahState>(
@@ -39,6 +77,10 @@ class SurahDetailScreen extends StatelessWidget {
             }
           },
           builder: (context, state) {
+            if (state is SuccessGetLastAyatSurah) {
+              indexAyat = state.ayat;
+            }
+
             // loading surah
             if (state is LoadingSurahDetail) {
               return const Center(child: CircularProgressIndicator.adaptive());
@@ -71,7 +113,8 @@ class SurahDetailScreen extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: ListView.builder(
+                    child: ScrollablePositionedList.builder(
+                      itemScrollController: _itemScrollController,
                       itemCount: data.numberOfVerses,
                       itemBuilder: (context, index) {
                         return InkWell(
@@ -92,8 +135,10 @@ class SurahDetailScreen extends StatelessWidget {
                                         builder: (context) {
                                           return AlertDialog(
                                             shape: const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(10.0))),
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(10.0),
+                                              ),
+                                            ),
                                             contentPadding:
                                                 const EdgeInsets.only(
                                                     top: 5.0, left: 5),
@@ -119,6 +164,10 @@ class SurahDetailScreen extends StatelessWidget {
                                                           context)
                                                       .add(ViewDetailSurah(
                                                           number: data.number));
+                                                  BlocProvider.of<SurahBloc>(
+                                                          context)
+                                                      .add(GetLastAyatSurah(
+                                                          surah: surah));
                                                 },
                                                 child: const Text('OK'),
                                               ),
@@ -152,9 +201,8 @@ class SurahDetailScreen extends StatelessWidget {
                           },
                           child: Container(
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadiusDirectional.circular(
-                                10,
-                              ),
+                              borderRadius:
+                                  BorderRadiusDirectional.circular(10),
                               color: index % 2 == 0
                                   ? Constants.iwhite
                                   : Constants.iblueLight,
@@ -183,7 +231,8 @@ class SurahDetailScreen extends StatelessWidget {
                                       child: Container(
                                         alignment: Alignment.centerRight,
                                         child: ListView(
-                                          physics: ClampingScrollPhysics(),
+                                          physics:
+                                              const ClampingScrollPhysics(),
                                           shrinkWrap: true,
                                           children: <Widget>[
                                             Text(

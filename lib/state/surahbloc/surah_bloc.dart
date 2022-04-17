@@ -33,5 +33,14 @@ class SurahBloc extends Bloc<SurahEvent, SurahState> {
         emit(FailureMarkLastAyatSurah(info: e.toString()));
       }
     });
+
+    on<GetLastAyatSurah>((event, emit) async {
+      try {
+        var result = await pref.getMarkLastSurah(event.surah);
+        emit(SuccessGetLastAyatSurah(ayat: result));
+      } catch (e) {
+        emit(FailureGetLastAyatSurah(info: e.toString()));
+      }
+    });
   }
 }
