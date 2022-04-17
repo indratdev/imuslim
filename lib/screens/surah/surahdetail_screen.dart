@@ -94,6 +94,7 @@ class SurahDetailScreen extends StatelessWidget {
                   Container(
                     margin: const EdgeInsets.only(left: 10, right: 10),
                     child: Container(
+                      alignment: Alignment.center,
                       margin: const EdgeInsets.only(
                           top: 10, bottom: 10, left: 5, right: 5),
                       child: Text(
@@ -109,6 +110,7 @@ class SurahDetailScreen extends StatelessWidget {
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
                   ),
