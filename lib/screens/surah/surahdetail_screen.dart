@@ -10,7 +10,7 @@ class SurahDetailScreen extends StatelessWidget {
   String indexAyat = "0";
 
   // scroll to index
-  scrollToIndex(int index) {
+  void scrollToIndex(int index) {
     _itemScrollController.scrollTo(
         index: index,
         duration: const Duration(seconds: 3),
@@ -48,7 +48,7 @@ class SurahDetailScreen extends StatelessWidget {
                 }
               },
               itemBuilder: (context) => [
-                PopupMenuItem<int>(
+                const PopupMenuItem<int>(
                   value: 0,
                   child: Text(
                     'Ke Terakhir dibaca',
