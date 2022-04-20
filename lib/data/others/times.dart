@@ -23,7 +23,6 @@ class Times {
 
   String currentTime() {
     var current = DateFormat('HH:mm').format(DateTime.now());
-    print('current time : $current');
     return current;
   }
 

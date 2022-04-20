@@ -23,7 +23,6 @@ class PrayBloc extends Bloc<PrayEvent, PrayState> {
             repo.nextTimeShalat(result.datetime[0].times.toJson());
 
         final diffTime = await repo.checkSelisihWaktu(nextTimePrayer.value);
-        print('diffTime : $diffTime');
 
         emit(SuccessDefaultPrayTime(
           dataPrayTime: result,

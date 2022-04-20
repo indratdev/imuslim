@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:imuslim/screens/home/homescreen.dart';
+import 'package:imuslim/screens/others_menu/othersmenu.dart';
 import 'package:imuslim/screens/surah/surah_screen.dart';
 import 'package:imuslim/state/bottomnavbloc/bottomnav_bloc.dart';
 import 'package:imuslim/state/praybloc/pray_bloc.dart';
@@ -18,6 +19,7 @@ class IMuslimApp extends StatelessWidget {
     List<Widget> _widgetOption = <Widget>[
       HomeScreen(),
       SurahScreen(),
+      OthersMenu(),
     ];
 
     return BlocBuilder<BottomnavBloc, BottomnavState>(
@@ -30,6 +32,8 @@ class IMuslimApp extends StatelessWidget {
           } else if (state.page == 1) {
             BlocProvider.of<PrayBloc>(context).add(GetAllSurah());
             _appName = Constants.textQuran;
+          } else if (state.page == 2) {
+            _appName = 'Others Menu';
           }
         }
 
@@ -45,15 +49,17 @@ class IMuslimApp extends StatelessWidget {
             items: const <Widget>[
               Icon(Icons.access_time,
                   size: Constants.sizeBottomNav, semanticLabel: 'Waktu Shalat'),
-              Icon(Icons.mosque,
+              Icon(Icons.menu_book,
                   size: Constants.sizeBottomNav, semanticLabel: 'Surat'),
+              Icon(Icons.more_horiz,
+                  size: Constants.sizeBottomNav, semanticLabel: 'Others'),
             ],
             animationCurve: Curves.ease,
             animationDuration: const Duration(milliseconds: 500),
             buttonBackgroundColor: Constants.iwhite,
             height: 60,
             onTap: (index) {
-              print('tapped index- $index');
+              // print('tapped index- $index');
               BlocProvider.of<BottomnavBloc>(context)
                   .add(ChangePage(page: index));
             },

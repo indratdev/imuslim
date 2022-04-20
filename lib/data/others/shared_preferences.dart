@@ -12,7 +12,7 @@ class MySharedPref {
     pref = await SharedPreferences.getInstance();
 
     String stringValue = pref.getString(surah) ?? "0";
-    print('shared pref value : $stringValue');
+
     return stringValue;
   }
 }
