@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:imuslim/state/bloc/searchsurah_bloc.dart';
 import 'package:imuslim/state/bottomnavbloc/bottomnav_bloc.dart';
 import 'package:imuslim/state/locationbloc/location_bloc.dart';
 import 'package:imuslim/state/praybloc/pray_bloc.dart';
@@ -31,6 +32,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => SurahBloc()..add(ViewDetailSurah(number: 1)),
+        ),
+        BlocProvider(
+          create: (context) => SearchsurahBloc(),
         ),
       ],
       child: MaterialApp(

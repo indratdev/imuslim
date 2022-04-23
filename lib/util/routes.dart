@@ -5,6 +5,7 @@ import 'package:imuslim/screens/splash/splashscreen.dart';
 import 'package:imuslim/screens/surah/surah_screen.dart';
 import 'package:imuslim/screens/surah/surahdetail_screen.dart';
 
+import '../data/models/surah_model.dart';
 import '../screens/home/homescreen.dart';
 
 class Routes {
@@ -14,6 +15,6 @@ class Routes {
     '/splashscreen': (_) => SplashScreen(),
     '/surah': (_) => SurahScreen(),
     '/surahdetail': (_) => SurahDetailScreen(),
-    '/othersmenu': (_) => OthersMenu(),
+    // '/othersmenu': (_) => OthersMenu(),
   };
 }

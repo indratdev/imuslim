@@ -1,7 +1,8 @@
 import 'package:imuslim/data/models/pray_times.dart';
 import 'package:imuslim/data/models/spesifik_surah_model.dart';
-import 'package:imuslim/data/models/surah_model.dart';
+import 'package:imuslim/data/models/surah_model.dart' as surah;
 import 'package:imuslim/data/others/location_device.dart';
+import 'package:imuslim/data/others/surah.dart';
 import 'package:imuslim/data/others/times.dart';
 import 'package:imuslim/data/providers/api_prayerprovider.dart';
 
@@ -9,6 +10,7 @@ class Repository {
   final prayerApiProvider = ApiPrayerProvider();
   final timeProvider = Times();
   final locationDevice = LocationDevice();
+  final searchSurah = Surah();
 
   // repo Prayer Time
   Future<PrayTimes> getDailyTimesPray(double lat, double lon) {
@@ -39,7 +41,7 @@ class Repository {
   // =========== end repo location ===========
 
   // =========== repo surah =============================
-  Future<SurahModel> getSurah() {
+  Future<surah.SurahModel> getSurah() {
     return prayerApiProvider.getSurah();
   }
 
@@ -47,4 +49,12 @@ class Repository {
     return prayerApiProvider.getDetailSurah(number);
   }
   // =========== end repo surah =========================
+
+  // repo search surah
+  List<surah.Data> getsearchSurah(
+      String query, List<surah.Data> masterData) {
+    return searchSurah.getSearchSurah(query, masterData);
+  }
+
+  // =========== end repo search surah =========================
 }

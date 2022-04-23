@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:imuslim/screens/home/homescreen.dart';
 import 'package:imuslim/screens/others_menu/othersmenu.dart';
 import 'package:imuslim/screens/surah/surah_screen.dart';
+import 'package:imuslim/screens/widgets/appbar_reuseable.dart';
 import 'package:imuslim/state/bottomnavbloc/bottomnav_bloc.dart';
 import 'package:imuslim/state/praybloc/pray_bloc.dart';
 import 'package:imuslim/util/constants.dart';
@@ -31,18 +32,17 @@ class IMuslimApp extends StatelessWidget {
             _appName = Constants.appName;
           } else if (state.page == 1) {
             BlocProvider.of<PrayBloc>(context).add(GetAllSurah());
-            _appName = Constants.textQuran;
-          } else if (state.page == 2) {
-            _appName = 'Others Menu';
+            // } else if (state.page == 2) {
+            //   _appName = 'Others Menu';
           }
         }
 
         return Scaffold(
-          appBar: AppBar(
-            title: Text(
-              _appName,
-            ),
-          ),
+          // AppBar(
+          //   title: Text(
+          //     _appName,
+          //   ),
+          // ),
           body: _widgetOption.elementAt(_currentIndex),
           bottomNavigationBar: CurvedNavigationBar(
             index: _currentIndex,
@@ -51,8 +51,8 @@ class IMuslimApp extends StatelessWidget {
                   size: Constants.sizeBottomNav, semanticLabel: 'Waktu Shalat'),
               Icon(Icons.menu_book,
                   size: Constants.sizeBottomNav, semanticLabel: 'Surat'),
-              Icon(Icons.more_horiz,
-                  size: Constants.sizeBottomNav, semanticLabel: 'Others'),
+              // Icon(Icons.more_horiz,
+              //     size: Constants.sizeBottomNav, semanticLabel: 'Others'),
             ],
             animationCurve: Curves.ease,
             animationDuration: const Duration(milliseconds: 500),
